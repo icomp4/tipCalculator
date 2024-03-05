@@ -1,7 +1,5 @@
 package org.example.tipcalculator;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -35,12 +33,9 @@ public class TipController {
     public void initialize() {
         tipPercentLabel.setText(percent.format(tipPercentageSlider.getValue() / 100));
 
-        tipPercentageSlider.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                tipPercentLabel.setText(percent.format(newValue.doubleValue() / 100));
-                calculateTip();
-            }
+        tipPercentageSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            tipPercentLabel.setText(percent.format(newValue.doubleValue() / 100));
+            calculateTip();
         });
     }
 
